@@ -1,0 +1,90 @@
+a:-webkit-any-link {
+	text-decoration: none;
+}
+
+a{
+	text-decoration: none;
+}
+
+.pb-400{
+	padding-bottom: 400px;
+}
+
+.addScroll body::-webkit-scrollbar{
+    display: none!important;
+}
+
+.addScroll{
+	overflow-y:auto;
+	height: 200px;
+}
+
+/*color*/
+.bg-green{
+	background: #5EC394;
+}
+.bg-dark-green{
+	background: #2F5631;
+}
+.bg-white{
+	background: #ffffff;
+}
+
+.dark-green{
+	color: #2F5631;
+}
+.green{
+	color: #5EC394;
+}
+.white{
+	color: #ffffff!important;
+}
+.abu{
+	color: #B7B7C3;
+}
+
+.bc-dark-green{
+	background-color: #2F5631;
+}
+.bc-green{
+	background-color: #5EC394;
+}
+.bc-white{
+	background-color: #ffffff;
+}
+/*end color*/
+
+
+/*font custom*/
+.overBold{
+	font-weight: 900;
+}
+
+.fs-09{
+	font-size: 0.9rem;
+}
+.fs-08{
+	font-size: 0.8rem;
+}
+.fs-07{
+	font-size: 0.7rem;
+}
+.fs-06{
+	font-size: 0.6rem;
+}
+.fs-05{
+	font-size: 0.5rem;
+}
+.fs-04{
+	font-size: 0.4rem;
+}
+.fs-03{
+	font-size: 0.3rem;
+}
+.fs-02{
+	font-size: 0.2rem;
+}
+.fs-01{
+	font-size: 0.1rem;
+}
+/*end font custom*/

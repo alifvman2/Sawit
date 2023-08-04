@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect()->route('home.index');
+});
+
 Route::get('login', 'Auth\CustomAuthController@index')->name('login');
 Route::post('custom-login', 'Auth\CustomAuthController@customLogin')->name('login.custom'); 
 Route::get('registration', 'Auth\CustomAuthController@registration')->name('register-user');
 Route::post('custom-registration', 'Auth\CustomAuthController@customRegistration')->name('register.custom'); 
-Route::get('signout', 'Auth\CustomAuthController@signOut')->name('signout');
+Route::get('logout', 'Auth\CustomAuthController@logout')->name('logout');
 
-Route::group(['middleware' => 'auth.api'], function () {
-	Route::get('dashboard', 'Auth\CustomAuthController@dashboard'); 
+Route::group(['middleware' => ['auth']], function () {
+	Route::resources([
+	    'home' => HomeController::class,
+	    // 'posts' => PostController::class,
+	]);
 });
