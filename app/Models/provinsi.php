@@ -20,6 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
+ * @property Collection|DataAsosiasi[] $data_asosiasis
+ * @property Collection|DataKampu[] $data_kampus
+ * @property Collection|DataPerusahaan[] $data_perusahaans
  * @property Collection|Kota[] $kotas
  * @property Collection|Mitra[] $mitras
  *
@@ -39,6 +42,21 @@ class Provinsi extends Model
 		'location_id',
 		'status'
 	];
+
+	public function data_asosiasis()
+	{
+		return $this->hasMany(DataAsosiasi::class, 'provinsi');
+	}
+
+	public function data_kampus()
+	{
+		return $this->hasMany(DataKampu::class, 'provinsi');
+	}
+
+	public function data_perusahaans()
+	{
+		return $this->hasMany(DataPerusahaan::class, 'provinsi');
+	}
 
 	public function kotas()
 	{

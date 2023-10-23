@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CreateDataPerusahaansTable extends Migration
+class CreateDataPerusahaan extends Migration
 {
     use SoftDeletes;
     /**
@@ -15,6 +15,7 @@ class CreateDataPerusahaansTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('data_perusahaan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users');
@@ -46,8 +47,8 @@ class CreateDataPerusahaansTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-
         });
+
     }
 
     /**

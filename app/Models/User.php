@@ -34,21 +34,20 @@ class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-	use HasRoles;
-	use Impersonate;
+    use HasRoles;
+    use Impersonate;
     use Notifiable;
 
-	protected $table = 'users';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
+    
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nama_lengkap', 'email', 'jenis_mitra', 'no_telp', 'password'
     ];
 
     /**
@@ -72,8 +71,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-	public function mitras()
-	{
-		return $this->hasMany(Mitra::class, 'users');
-	}
+    public function mitras()
+    {
+        return $this->hasMany(Mitra::class, 'users');
+    }
 }

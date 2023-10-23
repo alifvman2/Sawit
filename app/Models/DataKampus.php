@@ -37,7 +37,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class DataKampu extends Model
+class DataKampus extends Model
 {
 	use SoftDeletes;
 	protected $table = 'data_kampus';

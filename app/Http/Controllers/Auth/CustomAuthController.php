@@ -21,6 +21,7 @@ class CustomAuthController extends Controller
       
     public function customLogin(Request $request)
     {
+
         try {
 
             $input = $request->all();
@@ -35,6 +36,32 @@ class CustomAuthController extends Controller
                 );
 
                 Session::put('access_token', $accessToken->access_token);
+
+                $data = User::where('users.id', $user->id)
+                    ->leftJoin('data_asosiasi', function ($join) {
+                        $join->on('data_asosiasi.users', '=', 'users.id')
+                            ->whereNull('data_asosiasi.deleted_at');
+                    })
+                    ->leftJoin('data_kampus', function ($join) {
+                        $join->on('data_kampus.users', '=', 'users.id')
+                            ->whereNull('data_kampus.deleted_at');
+                    })
+                    ->leftJoin('data_perusahaan', function ($join) {
+                        $join->on('data_perusahaan.users', '=', 'users.id')
+                            ->whereNull('data_perusahaan.deleted_at');
+                    })
+                    ->first();
+
+
+
+                if ($data->jenis_mitra == "Perusahaan") {
+                    return view('form.mitra_perusahaan')->withSuccess('You have signed-in');
+                }elseif ($data->jenis_mitra == "Kuliah") {
+                    return view('form.mitra_kuliah')->withSuccess('You have signed-in');
+                }elseif ($data->jenis_mitra == "Asosiasi") {
+                    return view('form.mitra_asosiasi')->withSuccess('You have signed-in');
+                }
+
                 return redirect()->route('home.index')->withSuccess('You have signed-in');
             
             } else {
@@ -56,17 +83,25 @@ class CustomAuthController extends Controller
       
     public function customRegistration(Request $request)
     {  
+
         $request->validate([
             'nama_lengkap' => 'required',
             'email' => 'required|email|unique:users',
             'no_telp' => 'required',
-            'nama_mitra' => 'required',
             'password' => 'required|min:6',
         ]);
-           
+
         $data = $request->all();
-        $check = $this->create($data);
-        
+        // return $data['nama_lengkap'];
+        // $check = $this->create($data);
+        $user = user::create([
+            'email' => $request->email,
+            'nama_lengkap' => $request->nama_lengkap,
+            'jenis_mitra' => $request->jenis_mitra,
+            'no_telp' => $request->no_telp,
+            'password' => Hash::make($request->password)
+        ]);
+
         if ($request->jenis_mitra == "Perusahaan") {
             return view('form.mitra_perusahaan')->withSuccess('You have signed-in');
         }elseif ($request->jenis_mitra == "Kuliah") {
@@ -84,7 +119,6 @@ class CustomAuthController extends Controller
             'nama_lengkap' => $data['nama_lengkap'],
             'email' => $data['email'],
             'no_telp' => $data['no_telp'],
-            'nama_mitra' => $data['nama_mitra'],
             'password' => Hash::make($data['password'])
         ]);
     }    
